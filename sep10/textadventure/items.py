@@ -10,7 +10,7 @@ items = [
         "id": "id2",
         "name": "spoon",
         "description": "A silver spoon that once was nice",
-        "actions": ["get", "drop", "look"],
+        "actions": ["get", "look"],
         "container": False
     },
     {
@@ -25,7 +25,16 @@ items = [
         "name": "chest",
         "description": "A locked wooden chest",
         "actions": ["open", "close", "look"],
+        "open constraint": ["id1"],
         "container": True,
-        "items": []
-    }
+        "items": ["id5"]
+    },
+    {
+        "id": "id5",
+        "name": "sock",
+        "description": "An old smelly sock",
+        "actions": ["get", "drop", "look"],
+        "container": False
+    },
+
 ]

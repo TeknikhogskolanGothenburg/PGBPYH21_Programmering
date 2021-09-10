@@ -24,7 +24,7 @@ room4 = {
 
 room5 = {
     "description": "a dead end",
-    "items": [],
+    "items": ["id4"],
     "exits": ["west"]
 }
 
