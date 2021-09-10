@@ -25,8 +25,18 @@ def main():
         color_print("green", "A B C D E F G")
 
         move = input(f"Player {player_in_turn}, pick a column: ")
-
-        player_in_turn = 2 if player_in_turn == 1 else 1
+        col = ord(move.upper()) - 65
+        complete = True
+        for row in board[::-1]:
+            if row[col] == 0:
+                row[col] = player_in_turn
+                break
+        else:
+            complete = False
+        if complete:
+            player_in_turn = 2 if player_in_turn == 1 else 1
+        else:
+            color_print("red", "That column is full, try a different column")
 
 
 
