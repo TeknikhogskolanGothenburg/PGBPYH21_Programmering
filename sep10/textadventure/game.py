@@ -68,6 +68,7 @@ def show_inventory(inventory):
         color_print("red", "Your inventory is empty")
     else:
         # inventory_items will be a list of the names of the items in the inventory
+        # TODO: Sort inventory before printing. Use function to make this simpler
         inventory_items = [an_item['name'] for item_id in inventory for an_item in items if item_id == an_item['id']]
         print("You have the following in your inventory:")
         for item in inventory_items:
