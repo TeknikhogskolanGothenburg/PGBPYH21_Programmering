@@ -1,6 +1,9 @@
+import json
 from map import the_map
 from items import items
 from terminal_color import color_print
+from os import listdir
+from os.path import isfile, join
 
 
 def go(row, col, direction):
@@ -93,6 +96,56 @@ def room_items(room):
     return items_in_room
 
 
+def save(row, col, inventory):
+    file_name = input("What would you like to call this save? ")
+    file_name += '.taf'
+
+    data_to_save = {
+        'position': {
+            'row': row,
+            'col': col
+        },
+        'inventory': inventory,
+        'map': the_map
+    }
+
+    with open('./saved_games/' + file_name, 'w', encoding='utf-8') as save_file:
+        json.dump(data_to_save, save_file)
+
+def list_saved_games():
+    files = []
+    for f in listdir('./saved_games'):
+        if f.endswith('.taf'):
+            files.append(f.replace('.taf', ''))
+
+    files = [f.replace('.taf', '') for f in listdir('./saved_games') if f.endswith('.taf')]
+
+    return files
+
+
+def load():
+    global the_map
+    saved_games = list_saved_games()
+
+    while True:
+        print("You have these games saved:")
+        for game in saved_games:
+            color_print("yellow", f"\t{game}")
+        file_name = input("What save would you like to load? ")
+        if file_name in saved_games:
+            break
+        color_print("red", f"{file_name} is not the name of a saved game")
+
+    file_name += '.taf'
+    with open('./saved_games/' + file_name, 'r', encoding='utf-8') as save_file:
+        loaded_data = json.load(save_file)
+
+    the_map = loaded_data['map']
+    inventory = loaded_data['inventory']
+    row = loaded_data['position']['row']
+    col = loaded_data['position']['col']
+    return row, col, inventory
+
 def room_items_comp(room):
     """
     Same as function room_items, but this one uses a comprehension
@@ -137,10 +190,10 @@ def main():
             show_inventory(inventory)
 
         elif main_command == "save":
-            pass
+            save(row, col, inventory)
 
         elif main_command == "load":
-            pass
+            row, col, inventory = load()
 
         elif main_command == "quit":
             running = False
