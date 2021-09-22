@@ -25,7 +25,7 @@ items = [
         "name": "chest",
         "description": "A locked wooden chest",
         "actions": ["open", "close", "look"],
-        "open constraint": ["id1"],
+        "open_constraint": ["id1"],
         "container": True,
         "items": ["id5"]
     },

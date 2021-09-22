@@ -112,6 +112,7 @@ def save(row, col, inventory):
     with open('./saved_games/' + file_name, 'w', encoding='utf-8') as save_file:
         json.dump(data_to_save, save_file)
 
+
 def list_saved_games():
     files = []
     for f in listdir('./saved_games'):
