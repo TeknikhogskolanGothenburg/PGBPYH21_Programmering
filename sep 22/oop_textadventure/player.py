@@ -7,6 +7,14 @@ class Player:
         self.inventory = []
 
     def go(self, direction, exits):
+        """
+        Moves a player to a different room
+        Parameters:
+            direction: str, the direction the player should move. Possible values are north, south, east, and west
+            exits: [str], a list of strings indicating possible directions to exit this room
+            Returns:
+                None
+        """
         if direction in exits:
             if direction == "north":
                 self.position.row -= 1
